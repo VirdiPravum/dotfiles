@@ -1,0 +1,570 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #000000
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[ricing]
+background = #471800
+background-alt = #0401000
+background-alt2 = #43464B
+foreground = #C0C0C0
+foreground-alt = #962800
+foreground-alt2 = #FF8700
+urgent-bg = #FF0000
+urgent-fg = #000000 
+underline = #43464B
+underline-alt = #FF8700
+underline-alt2 = #FFCB00
+
+
+[bar/topBar]
+
+
+bottom = false
+width = 100%
+height = 27
+radius = 0 
+fixed-center = true
+
+background = ${ricing.background-alt}
+foreground = ${ricing.foreground-alt}
+
+
+
+border-size = 0
+border-color = 
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = mononoki:pixelsize=10;1
+font-1 = FontAwesome:fontformat=opentype:size=10:antialias=false;0
+font-2 = mononoki:pixelsize=10;1
+font-3 = dejavu:size=31;0 
+font-4 = dejavu:pixelsize=10;1 
+font-5 = dejavu:size=27;0 
+
+modules-left =
+modules-center = arrow5 mpd arrow6
+modules-right =  
+
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-background = #000000
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+ibottom = true
+
+[bar/botBar]
+bottom = true
+width = 100%
+height = 27
+radius = 0 
+fixed-center = true
+
+background = ${ricing.background-alt}
+foreground = ${ricing.foreground-alt}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = 
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = mononoki:pixelsize=10;1
+font-1 = FontAwesome:fontformat=opentype:size=10:antialias=false;0
+font-2 = mononoki:pixelsize=10;1
+font-3 = dejavu:size=31;0 
+font-4 = dejavu:pixelsize=10;1 
+font-5 = dejavu:size=27;0 
+
+modules-left = filesystem pulseaudio memory arrow4 
+modules-center = arrow5 i3 arrow6
+modules-right = arrow2 cpu wlan battery date  
+
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-background = #000000
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+ibottom = true
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix =
+format-prefix-foreground = #962800
+format-prefix-underline = #FF8700
+
+label-layout =
+label-layout-underline = #FF8700
+label-layout-foreground = ${ricing.foreground}
+label-layout-background = ${ricing.background}
+label-indicator-padding =
+label-indicator-margin =
+label-indicator-background = ${ricing.background}
+label-indicator-foreground = ${ricing.foreground}
+label-indicator-underline = #FF8700
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = " %mountpoint%: %percentage_used%% "
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${ricing.foreground}
+label-mounted-foreground = ${ricing.foreground}
+label-mounted-background = ${ricing.background}
+label-mounted-underline = ${ricing.underline-alt2}
+label-unmounted-underline = ${ricing.underline-alt2}
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+strip-wsnumbers = true
+wrapping-scroll = false
+
+ws-icon-0 = "1;"
+ws-icon-1 = "2;"
+ws-icon-2 = "3;"
+ws-icon-3 = "4;"
+ws-icon-4 = "5;"
+ws-icon-5 = "6;"
+ws-icon-6 = "7;"
+ws-icon-7 = "8;"
+ws-icon-8 = "9;"
+ws-icon-9 = "10;"
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index% %icon%
+label-focused-foreground = ${ricing.foreground-alt2}
+label-focused-background = ${ricing.background-alt2}
+label-focused-underline = ${ricing.underline-alt}
+label-focused-overline = ${ricing.underline-alt}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index% %icon%
+label-unfocused-foreground = ${ricing.foreground}
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-overline = ${ricing.underline-alt}
+label-unfocused-underline = ${ricing.underline-alt}
+label-unfocused-background = ${ricing.background}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index% %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index% %icon%
+label-urgent-background = ${ricing.urgent-bg}
+label-urgent-foreground = ${ricing.urgent-fg}
+label-urgent-underline =
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = 
+
+
+[module/mpd]
+type = internal/mpd
+format-online =   <icon-prev> <label-song> <icon-next> <icon-stop> <toggle> 
+
+host = 127.0.0.1
+port = 6600
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/arrow1]
+type = custom/text
+content = ◣
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-font = 4
+ 
+[module/arrow2]
+type = custom/text
+content = ◢ 
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-font = 4
+
+[module/arrow3]
+type = custom/text
+content = ◥ 
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-font = 4
+
+[module/arrow4]
+type = custom/text
+content = ◤ 
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-font = 4
+
+[module/arrow5]
+type = custom/text
+content = ◢ 
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-underline = ${ricing.underline-alt}
+content-font = 4
+
+[module/arrow6]
+type = custom/text
+content = ◤ 
+content-foreground = ${ricing.background}
+content-background = ${ricing.background-alt}
+content-overline = ${ricing.underline-alt}
+content-font = 6
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.background-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = ""
+format-prefix-foreground = ${ricing.foreground}
+format-overline = ${ricing.underline-alt2} 
+label = "  %percentage:2%%  "
+label-foreground = ${ricing.foreground}
+label-background = ${ricing.background}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = 
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${ricing.underline-alt2}
+label-foreground = ${ricing.foreground}
+label = "  %percentage_used%%  "
+label-background = ${ricing.background}
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <ramp-signal><label-connected>
+format-connected-background = ${ricing.background}
+format-connected-overline = ${ricing.underline-alt2}
+label-connected = "  %essid%  "
+label-connected-foreground = ${ricing.foreground}
+label-connected-overline = ${ricing.underline-alt2}
+
+format-disconnected = " disconnected "
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = %{F#040100}▰%{F-}%{F#040100}▰▰▰▰%{F-}
+ramp-signal-1 = %{F#43464B}▰▰%{F-}%{F#040100}▰▰▰%{F-}
+ramp-signal-2 = %{F#808080}▰▰▰%{F-}%{F#040100}▰▰%{F-}
+ramp-signal-3 = %{F#C0C0C0}▰▰▰▰%{F-}%{F#040100}▰%{F-}
+ramp-signal-4 = %{F#FFFFFF}▰▰▰▰▰%{F-}
+;ramp-signal-foreground = #000000 
+ramp-signal-overline = ${ricing.underline-alt2}
+ramp-signal-font = 5
+
+[module/eth]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+format-connected-underline = ${ricing.foreground}
+format-connected-prefix = ""
+format-connected-prefix-foreground = ${ricing.foreground}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %Y-%m-%d "
+
+time = " %H:%M:%S "
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-overline = ${ricing.underline-alt2}
+
+label = %date% %time%
+label-foreground = ${ricing.foreground}
+label-background = ${ricing.background}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume><bar-volume>
+label-volume = " VOL %percentage%% "
+label-volume-foreground = ${ricing.foreground}
+label-volume-background = ${ricing.background}
+label-volume-underline = ${ricing.underline-alt2}
+label-muted = " muted "
+label-muted-foreground = ${ricing.foreground}
+label-muted-background = ${ricing.background}
+label-muted-underline = ${ricing.underline-alt2}
+bar-volume-width = 20
+bar-volume-foreground-0 = #43464B
+bar-volume-foreground-1 = #43464B
+bar-volume-foreground-2 = #43464B
+bar-volume-foreground-3 = #43464B
+bar-volume-foreground-4 = #808080
+bar-volume-foreground-5 = #808080
+bar-volume-foreground-6 = #FFFFFF
+bar-volume-gradient = true
+bar-volume-indicator = 
+bar-volume-indicator-font = 5
+bar-volume-fill = ▰
+bar-volume-fill-font = 5
+bar-volume-empty = ▰
+bar-volume-empty-font = 5
+
+bar-volume-empty-foreground = ${ricing.background-alt}
+bar-volume-empty-underline = ${ricing.underline-alt2}
+bar-volume-empty-background = ${ricing.background}
+bar-volume-fill-underline = ${ricing.underline-alt2}
+bar-volume-fill-background = ${ricing.background}
+
+[module/battery]
+
+type = internal/battery
+battery = BAT1
+adapter = ADP1
+full-at = 98
+
+label-charging = " %percentage%% "
+label-charging-foreground = ${ricing.foreground}
+label-charging-background = ${ricing.background}
+
+label-discharging = " %percentage%% "
+label-discharging-foreground = ${ricing.foreground}
+label-discharging-background = ${ricing.background} 
+
+label-full = "  %percentage%% "
+label-full-foreground = ${ricing.foreground}
+label-full-background = ${ricing.background}
+
+format-charging = <animation-charging><label-charging>
+format-charging-overline = ${ricing.underline-alt2}
+
+format-discharging = <animation-discharging><label-discharging>
+format-discharging-overline = ${self.format-charging-overline}
+
+format-full-prefix =
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-overline = ${self.format-charging-overline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${ricing.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${ricing.foreground}
+animation-charging-background = ${ricing.background}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${ricing.foreground}
+animation-discharging-background = ${ricing.background}
+animation-discharging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-left = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
